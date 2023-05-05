@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  //   justify-content: center;
+  width: 100%;
+  padding-left: 20px;
+
+  > a {
+    margin: 0 10px;
+    padding: 20px 0;
+    color: #eaecef;
+    transition: all 0.2s ease-in-out;
+
+    &:hover,
+    &.active {
+      color: rgb(230, 96, 7);
+    }
+  }
+}
