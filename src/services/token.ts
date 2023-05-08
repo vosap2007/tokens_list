@@ -36,7 +36,7 @@ export interface TokenMetadata {
   name: string;
   symbol: string;
   decimals: number;
-  icon: string | null;
+  icon: string | undefined;
   ref?: number | string;
   near?: number | string;
   total?: number;
@@ -48,7 +48,8 @@ export interface TokenMetadata {
 export interface TokenWithMetadata extends TokenInfo {
   id: string;
   metadata: TokenMetadata;
-  refPrice?: string | object[];
+  refPrice?: string | object[] | any;
+  price?: number;
 }
 export interface TokensObject {
   [id: string]: TokenInfo;
@@ -126,7 +127,7 @@ export const ftGetTokenMetadata = async (
       name: id,
       symbol: id?.split('.')[0].slice(0, 8),
       decimals: 6,
-      icon: null,
+      icon: undefined,
     };
   }
 };
@@ -143,7 +144,7 @@ export const getNearPrice = async (): Promise<string> => {
     .catch(() => []);
 };
 
-export const getTokenPriceList = async (): Promise<object[]> => {
+export const getTokenPriceList = async (): Promise<object[] | any> => {
   return fetch(config.indexerUrl + '/list-token-price', {
     method: 'GET',
     headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -156,7 +157,7 @@ export const getTokenPriceList = async (): Promise<object[]> => {
     });
 };
 
-const getTokens = (): Promise<TokensObject> => {
+export const getTokens = (): Promise<TokensObject> => {
   const args = {
     from_index: 0,
     limit: 100,
@@ -178,7 +179,9 @@ export const useTokensWithMetadata = () => {
           Object.keys(tokenList).map((tokenId) => ftGetTokenMetadata(tokenId))
         );
         const nearPrice = getNearPrice();
+
         const priceTokens = getTokenPriceList();
+
         return await Promise.all([
           tokenList,
           tokenMetadataPromise,
@@ -200,6 +203,7 @@ export const useTokensWithMetadata = () => {
                 ? data[3]
                 : (data[4] && data[4][item.id]?.price) || '0',
           });
+          console.log('data[4]', data[4][item.id].price);
         });
         const updatedArr = arr.filter(
           (item) =>
