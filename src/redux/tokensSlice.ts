@@ -19,4 +19,17 @@ export const tokensSlice = createSlice({
   },
 });
 
+export const authorizationSlice = createSlice({
+  name: 'authorization',
+  initialState: {
+    value: false,
+  },
+  reducers: {
+    getAuthorization: (state) => {
+      state.value = !state.value;
+    },
+  },
+});
+
 export const { getTokens } = tokensSlice.actions;
+export const { getAuthorization } = authorizationSlice.actions;
