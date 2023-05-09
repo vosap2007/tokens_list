@@ -30,6 +30,9 @@ export interface TokenInfo {
   last_accrue_time: string;
   lend_reward_rate_per_week: string;
   debt_reward_rate_per_week: string;
+  id?: string;
+  refPrice?: number;
+  metadata?: any;
 }
 export interface TokenMetadata {
   id: string | number | any;
@@ -203,7 +206,6 @@ export const useTokensWithMetadata = () => {
                 ? data[3]
                 : (data[4] && data[4][item.id]?.price) || '0',
           });
-          console.log('data[4]', data[4][item.id].price);
         });
         const updatedArr = arr.filter(
           (item) =>

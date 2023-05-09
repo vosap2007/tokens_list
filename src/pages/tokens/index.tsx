@@ -1,19 +1,29 @@
-import Meta from '@/components/seo/Meta';
-import { useTokensWithMetadata } from '@/services/token';
-import BigNumber from 'bignumber.js';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTokens } from '@/redux/tokensSlice';
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useTokensWithMetadata } from '@/services/token';
+import Meta from '@/components/seo/Meta';
+import BigNumber from 'bignumber.js';
 import styles from '../../styles/Tokens.module.scss';
 
 const TokensPage: NextPage = () => {
+  const tokens = useSelector((state: any) => state.tokens.value);
+  const dispatch = useDispatch();
   const lendList = useTokensWithMetadata();
+
+  useEffect(() => {
+    lendList && dispatch(getTokens(lendList));
+  }, [lendList]);
+
   return (
     <Meta title="Tokens Page" description="There is all information to tokens.">
       <div className={styles.tokens}>
         <h1 className={styles.tokens_title}>Tokens Page</h1>
         <ul className={styles.tokens_list}>
-          {lendList?.map(({ metadata, refPrice, id }: any) => {
-            const { icon, name, symbol } = metadata;
+          {tokens?.map(({ metadata, refPrice, id }: any) => {
+            const { icon, symbol } = metadata;
 
             return (
               <li key={id}>

@@ -28,6 +28,12 @@
 
   color: #eaecef;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: #343841;
+    border-radius: 10px;
+  }
 }
 
 .tokens_left {
