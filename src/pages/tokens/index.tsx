@@ -10,11 +10,14 @@ import styles from '../../styles/Tokens.module.scss';
 
 const TokensPage: NextPage = () => {
   const tokens = useSelector((state: any) => state.tokens.value);
+  const wallet = useSelector((state: any) => state.wallet);
   const isAuthorization = useSelector(
     (state: any) => state.authorization.value
   );
   const dispatch = useDispatch();
   const lendList = useTokensWithMetadata();
+
+  console.log('wallet', wallet[0].modal.show());
 
   useEffect(() => {
     lendList && dispatch(getTokens(lendList));

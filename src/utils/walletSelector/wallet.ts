@@ -15,6 +15,7 @@ export const useWalletSelector = () => {
   useEffect(() => {
     getWalletSelector()
       .then((response) => {
+        console.log('response', response);
         setSelector(response[0]);
         setModal(response[1]);
       })
@@ -40,6 +41,7 @@ export const getWalletSelector = async (): Promise<any[]> => {
     theme: 'dark',
   });
 
-  const result = Promise.all([selector, modal]);
-  return result;
+  //   const result = Promise.all([selector, modal]);
+
+  return [selector, modal];
 };
