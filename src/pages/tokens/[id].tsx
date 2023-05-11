@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import Meta from '@/components/seo/Meta';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { TokenInfo } from '@/services/token';
 import styles from '../../styles/Token.module.scss';
+import { TokenInfo } from '@/services/services.interface';
 
 const TokenPage: NextPage = () => {
   const [token, setToken] = useState<TokenInfo>();

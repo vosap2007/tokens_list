@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Meta from '@/components/seo/Meta';
 import { getAuthorization } from '@/redux/tokensSlice';

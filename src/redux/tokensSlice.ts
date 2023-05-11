@@ -1,9 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-export interface TokensState {
-  value: [] | any;
-}
+import { TokensState } from './redux.interface';
 
 const initialState: TokensState = {
   value: [],
