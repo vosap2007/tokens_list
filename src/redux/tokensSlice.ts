@@ -30,7 +30,7 @@ export const fetchUserById = createAsyncThunk('user/fetchWallet', async () => {
 export const walletSlice = createSlice({
   name: 'wallet',
   initialState: [],
-  extraReducers: (builder) => {
+  extraReducers: (builder: any) => {
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       state.push(action.payload);
     });
@@ -47,18 +47,5 @@ export const tokensSlice = createSlice({
   },
 });
 
-export const authorizationSlice = createSlice({
-  name: 'authorization',
-  initialState: {
-    value: false,
-  },
-  reducers: {
-    getAuthorization: (state) => {
-      state.value = !state.value;
-    },
-  },
-});
-
 export const { getTokens } = tokensSlice.actions;
-export const { getAuthorization } = authorizationSlice.actions;
 export default walletSlice.reducer;

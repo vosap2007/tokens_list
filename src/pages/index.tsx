@@ -1,18 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Meta from '@/components/seo/Meta';
-import { fetchUserById, getAuthorization } from '@/redux/tokensSlice';
 import styles from '../styles/Home.module.scss';
-import { useEffect } from 'react';
 
 const Home = () => {
-  const isAuthorization = useSelector(
-    (state: any) => state.authorization.value
-  );
-  const dispatch = useDispatch();
+  const wallet = useSelector((state: any) => state.wallet);
 
-  useEffect(() => {
-    dispatch(fetchUserById());
-  }, []);
+  const handleSignOut = async () => {
+    const selector = await wallet[0].selector?.wallet();
+    selector
+      ?.signOut()
+      .then(() => window.location.reload())
+      .catch((err: any) => console.error(err));
+  };
 
   return (
     <Meta title="Home Page">
@@ -21,10 +20,12 @@ const Home = () => {
         <button
           className={styles.home__button}
           onClick={() => {
-            dispatch(getAuthorization());
+            !wallet[0]?.selector.isSignedIn()
+              ? wallet[0]?.modal.show()
+              : handleSignOut();
           }}
         >
-          {isAuthorization ? 'Sign In' : 'Sign Out'}
+          {!wallet[0]?.selector.isSignedIn() ? 'Sign In' : 'Sign Out'}
         </button>
       </div>
     </Meta>
