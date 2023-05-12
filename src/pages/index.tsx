@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.scss';
 
 const Home = () => {
   const wallet = useSelector((state: any) => state.wallet);
+  const state = wallet[0]?.selector?.store.getState();
 
   const handleSignOut = async () => {
     const selector = await wallet[0].selector?.wallet();
@@ -16,7 +17,13 @@ const Home = () => {
   return (
     <Meta title="Home Page">
       <div className={styles.home}>
-        <div>Authorization Page</div>
+        {wallet[0]?.selector.isSignedIn() ? (
+          <div className={styles.home__account_id}>
+            Hello <p>{state?.accounts[0].accountId}</p>
+          </div>
+        ) : (
+          <div>Authorization Page</div>
+        )}
         <button
           className={styles.home__button}
           onClick={() => {

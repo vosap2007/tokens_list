@@ -8,6 +8,17 @@
   background-color: #161617;
   box-shadow: inset 0px 2px 2px #1b1e25;
 
+  &__account_id {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    p {
+      color: rgb(230, 96, 7);
+      font-size: 25px;
+    }
+  }
+
   &__button {
     padding: 5px 10px;
     border-radius: 5px;
