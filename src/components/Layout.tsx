@@ -1,4 +1,4 @@
-import { fetchUserById } from '@/redux/tokensSlice';
+import { fetchWallet } from '@/redux/tokensSlice';
 import { getTokens } from '@/redux/tokensSlice';
 import { useTokensWithMetadata } from '@/services/token';
 import { FC, PropsWithChildren, useEffect } from 'react';
@@ -14,7 +14,7 @@ const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
   }, [lendList]);
 
   useEffect(() => {
-    dispatch(fetchUserById());
+    dispatch(fetchWallet());
   }, []);
 
   return (

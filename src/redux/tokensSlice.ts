@@ -13,7 +13,7 @@ const initialSt: TokensState = {
   value: [],
 };
 
-export const fetchUserById = createAsyncThunk('user/fetchWallet', async () => {
+export const fetchWallet = createAsyncThunk('user/fetchWallet', async () => {
   const selector = await setupWalletSelector({
     network: 'mainnet',
     modules: [setupNearWallet()],
@@ -31,7 +31,7 @@ export const walletSlice = createSlice({
   name: 'wallet',
   initialState: [],
   extraReducers: (builder: any) => {
-    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+    builder.addCase(fetchWallet.fulfilled, (state, action) => {
       state.push(action.payload);
     });
   },
